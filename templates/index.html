@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Transcriber</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        #url {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        #transcribe {
+            padding: 10px 20px;
+        }
+        #output {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            min-height: 200px;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>YouTube Transcriber</h1>
+    <input type="text" id="url" placeholder="Enter YouTube URL">
+    <button id="transcribe">Transcribe</button>
+    <div id="output"></div>
+
+    <script>
+        $(document).ready(function() {
+            $('#transcribe').click(function() {
+                var url = $('#url').val();
+                $('#output').text('Transcribing...');
+                $.ajax({
+                    url: '/transcribe',
+                    type: 'POST',
+                    data: {url: url},
+                    success: function(data) {
+                        $('#output').text(data.transcription);
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        var errorMessage = 'An error occurred while transcribing.';
+                        if (jqXHR.responseJSON && jqXHR.responseJSON.error) {
+                            errorMessage = jqXHR.responseJSON.error;
+                        }
+                        $('#output').html('<span class="error">Error: ' + errorMessage + '</span>');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
