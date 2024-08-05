@@ -2,10 +2,8 @@ from flask import Flask, render_template, request, jsonify
 import yt_dlp
 import speech_recognition as sr
 from pydub import AudioSegment
-import wave
 import os
 import logging
-import numpy as np
 from pyAudioAnalysis import audioSegmentation as aS
 
 app = Flask(__name__)
@@ -43,36 +41,40 @@ def transcribe_audio(audio_file):
         
         # Perform speaker diarization using pyAudioAnalysis
         logging.info("Starting speaker diarization...")
-        segments = aS.speaker_diarization(audio_file, n_speakers=2)
-        logging.info("Speaker diarization completed.")
+        clusters, _, _ = aS.speaker_diarization(audio_file, n_speakers=2)
+        logging.info(f"Speaker diarization completed. Clusters: {clusters}")
 
         # Load the audio file
         audio = AudioSegment.from_wav(audio_file)
         
         sample_rate = audio.frame_rate
         full_text = ""
-        
-        for i, segment in enumerate(segments):
-            start_time, end_time, speaker = segment
-            start_time = start_time * 1000  # Convert to milliseconds
-            end_time = end_time * 1000  # Convert to milliseconds
-            audio_chunk = audio[start_time:end_time]
-            
-            temp_file = "temp_chunk.wav"
-            audio_chunk.export(temp_file, format="wav")
-            
-            with sr.AudioFile(temp_file) as source:
-                audio_data = recognizer.record(source)
-                try:
-                    text = recognizer.recognize_google(audio_data)
-                    full_text += f"Speaker {speaker}: {text} "
-                    logging.debug(f"Segment {i} transcribed successfully")
-                except sr.UnknownValueError:
-                    logging.warning(f"Could not understand audio in segment {i}")
-                except sr.RequestError as e:
-                    logging.error(f"Could not request results from Google Speech Recognition service; {e}")
+        current_speaker = clusters[0]
+        start_time = 0
+
+        for i in range(1, len(clusters)):
+            if clusters[i] != current_speaker or i == len(clusters) - 1:
+                end_time = i * (audio.duration_seconds / len(clusters)) * 1000
+                audio_chunk = audio[start_time:end_time]
                 
-            os.remove(temp_file)
+                temp_file = "temp_chunk.wav"
+                audio_chunk.export(temp_file, format="wav")
+                
+                with sr.AudioFile(temp_file) as source:
+                    audio_data = recognizer.record(source)
+                    try:
+                        text = recognizer.recognize_google(audio_data)
+                        full_text += f"Speaker {current_speaker}: {text} "
+                        logging.debug(f"Segment transcribed successfully")
+                    except sr.UnknownValueError:
+                        logging.warning(f"Could not understand audio in segment")
+                    except sr.RequestError as e:
+                        logging.error(f"Could not request results from Google Speech Recognition service; {e}")
+                    
+                os.remove(temp_file)
+                
+                current_speaker = clusters[i]
+                start_time = end_time
 
         if full_text:
             logging.info("Transcription completed successfully")
@@ -115,3 +117,4 @@ def transcribe_video():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
