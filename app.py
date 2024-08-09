@@ -5,6 +5,7 @@ from pydub import AudioSegment
 import os
 import logging
 from pyAudioAnalysis import audioSegmentation as aS
+from datetime import timedelta
 
 app = Flask(__name__)
 
@@ -34,6 +35,10 @@ def download_video(url):
         logging.exception(f"Error downloading video: {str(e)}")
         return f"Error: {str(e)}"
 
+def format_time(milliseconds):
+    seconds = int(milliseconds / 1000)
+    return f"{seconds // 60:02d}:{seconds % 60:02d}"
+
 def transcribe_audio(audio_file):
     recognizer = sr.Recognizer()
     try:
@@ -47,38 +52,56 @@ def transcribe_audio(audio_file):
         # Load the audio file
         audio = AudioSegment.from_wav(audio_file)
         
-        sample_rate = audio.frame_rate
-        full_text = ""
+        transcript = []
         current_speaker = clusters[0]
         start_time = 0
+        segment_text = ""
+        min_segment_duration = 3000  # Minimum segment duration in milliseconds
 
         for i in range(1, len(clusters)):
             if clusters[i] != current_speaker or i == len(clusters) - 1:
                 end_time = i * (audio.duration_seconds / len(clusters)) * 1000
-                audio_chunk = audio[start_time:end_time]
+                segment_duration = end_time - start_time
                 
-                temp_file = "temp_chunk.wav"
-                audio_chunk.export(temp_file, format="wav")
-                
-                with sr.AudioFile(temp_file) as source:
-                    audio_data = recognizer.record(source)
-                    try:
-                        text = recognizer.recognize_google(audio_data)
-                        full_text += f"Speaker {current_speaker}: {text} "
-                        logging.debug(f"Segment transcribed successfully")
-                    except sr.UnknownValueError:
-                        logging.warning(f"Could not understand audio in segment")
-                    except sr.RequestError as e:
-                        logging.error(f"Could not request results from Google Speech Recognition service; {e}")
+                if segment_duration >= min_segment_duration:
+                    audio_chunk = audio[start_time:end_time]
                     
-                os.remove(temp_file)
+                    temp_file = "temp_chunk.wav"
+                    audio_chunk.export(temp_file, format="wav")
+                    
+                    with sr.AudioFile(temp_file) as source:
+                        audio_data = recognizer.record(source)
+                        try:
+                            text = recognizer.recognize_google(audio_data)
+                            segment_text += f" {text}"
+                        except sr.UnknownValueError:
+                            logging.warning(f"Could not understand audio in segment")
+                        except sr.RequestError as e:
+                            logging.error(f"Could not request results from Google Speech Recognition service; {e}")
+                        
+                    os.remove(temp_file)
+                    
+                    if segment_text.strip():
+                        transcript.append({
+                            "speaker": current_speaker,
+                            "start_time": start_time,
+                            "end_time": end_time,
+                            "text": segment_text.strip()
+                        })
+                    
+                    segment_text = ""
+                    start_time = end_time
                 
                 current_speaker = clusters[i]
-                start_time = end_time
 
-        if full_text:
+        if transcript:
             logging.info("Transcription completed successfully")
-            return full_text.strip()
+            formatted_transcript = ""
+            for segment in transcript:
+                start = format_time(segment['start_time'])
+                end = format_time(segment['end_time'])
+                formatted_transcript += f"[{start} - {end}] Speaker {segment['speaker']}:\n{segment['text']}\n\n"
+            return formatted_transcript.strip()
         else:
             logging.error("No text was transcribed from the audio")
             return "Error: No text could be transcribed from the audio"
