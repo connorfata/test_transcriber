@@ -1,1 +1,353 @@
-Error: No text could be transcribed from the audio
+[00:05 - 00:11] Speaker 0:
+have you heard the term zakka songs
+
+[00:16 - 00:20] Speaker 0:
+pause what is this
+
+[00:25 - 00:32] Speaker 1:
+become a meme
+
+[00:36 - 00:44] Speaker 0:
+how much is I feel comfortable being
+
+[00:44 - 00:54] Speaker 1:
+Mark Zuckerberg the face of Facebook has been under the bright lights for 20 years on the offensive buying Instagram WhatsApp and Oculus and the defensive
+
+[00:54 - 01:00] Speaker 1:
+play battling a never-ending Cascade of criticisms about the social political and business impacts of his
+
+[01:00 - 01:13] Speaker 1:
+in contrast to closed Source competitors like
+
+[01:13 - 01:21] Speaker 1:
+die and Google Zuckerberg predicts his company's newest AI models will have a profound impact on the progress of Technology business
+
+[01:21 - 01:41] Speaker 1:
+to get a glimpse of the real suck and the AI future he believes is the path forward so I found an article in the Harvard Crimson going back to 2003 where you were talking about open source okay like over 20 years ago so you've been thinking about this really long
+
+[01:46 - 01:49] Speaker 1:
+I mean you wouldn't have been able to build the early version of Facebook
+
+[01:55 - 01:58] Speaker 0:
+how old are you if you like and they just
+
+[01:58 - 02:03] Speaker 1:
+take the code use it for the thing that you need to it's more cost efficient
+
+[02:03 - 02:14] Speaker 1:
+and that's how you can start something like this in a dorm room some people see you as an unlikely champion of Open Source today you're laughing I don't know why I mean
+
+[02:20 - 02:24] Speaker 1:
+play meta have been pretty big proponents of open source for
+
+[02:24 - 02:35] Speaker 1:
+that kind of standardized
+
+[02:35 - 02:42] Speaker 1:
+what are the infrastructure for the industry that's going to happen with AI too you really putting a stake in the ground by open
+
+[02:42 - 02:50] Speaker 1:
+sing your AI in this attempt to build the AI rails for the future how much of this is a
+
+[02:56 - 03:14] Speaker 1:
+10 years was building our apps through phone platforms that are competitors controlled so it's it's so crushing to like go build something that you think is going to be good and then just get told by Apple that you can't ship it because they want to put us in a box because they give us his competitive you know we're big enough
+
+[03:17 - 03:21] Speaker 1:
+is that for the next generation of technology I want
+
+[03:21 - 03:28] Speaker 1:
+build and have more control over the next set of platforms that we're going to build so I think AI is a critical one and I
+
+[03:28 - 03:32] Speaker 0:
+augmented and virtual reality is another critical one
+
+[03:32 - 03:46] Speaker 1:
+it's kind of the way that we can control our own destiny on this and make sure that we have access to Leading AI is by building it and having it become an industry standard but actually gets stronger by being able to share it and and have the e
+
+[03:46 - 03:54] Speaker 1:
+you're continuing to improve meta AI across all of your products but also as a standalone chatbot why should we use meta
+
+[04:00 - 04:08] Speaker 1:
+soon is the ability to just like imagine stuff you're typing something in real time I do this with my daughter's all the time and as
+
+[04:08 - 04:11] Speaker 1:
+your kind of typing and and
+
+[04:11 - 04:16] Speaker 1:
+sing the query it's just generating the images as you enter the keystrokes
+
+[04:20 - 04:25] Speaker 1:
+really a few months old at this point was to
+
+[04:25 - 04:33] Speaker 1:
+play the end of the year have met AI be the most used AI assistant in the world and I think we're basically on track for that I mean there's hundreds of millions of people who are
+
+[04:33 - 04:56] Speaker 1:
+models that they use in different applications if you just think about all the startup
+
+[04:56 - 05:13] Speaker 1:
+models for what they're doing and it's really hard to do that with closed systems out there that's open AI or Gemini Google thing or whatever and
+
+[05:13 - 05:22] Speaker 1:
+this is like gets to a pretty core part of our philosophy is we don't believe there's going to be like 1:00 to rule them all our vision is that
+
+[05:22 - 05:26] Speaker 1:
+going to be millions or just billions of different models out there so not
+
+[05:45 - 05:50] Speaker 1:
+200 million creators on our
+
+[06:00 - 06:05] Speaker 1:
+Play version of themselves that they can like they can make it what they want so it's
+
+[06:05 - 06:15] Speaker 1:
+interact with them but also gives them control over how that interaction
+
+[06:25 - 06:36] Speaker 1:
+we have ai generated influencers with AI generated captions and avatars talking to avatars do you want to create the first AI generated
+
+[06:45 - 07:22] Speaker 1:
+is role-playing difficult social interactions that they're going to have so whether it's in a professional contacts like okay you want to ask your manager for a raise or like I'm having this hard conversation with my girlfriend or my friend play this conversation with you where there's there's no judgement right the AI is in there there's no like social repercussion for what you asked it but whatever evidence do you have that people want to live in this virtual world and and socialize with avatars or that it's actually good for us well I think that people want to connect with
+
+[07:26 - 07:29] Speaker 1:
+but all the technology allows you to
+
+[07:29 - 07:41] Speaker 1:
+smartphones that we could
+
+[07:41 - 07:57] Speaker 1:
+and consuming videos a better experience I just don't think that's the end of the line I think it gets more immersive you rename your company meta you're still pouring billions of dollars into
+
+[07:57 - 08:00] Speaker 0:
+are we as far along as you thought we
+
+[08:00 - 08:04] Speaker 1:
+play you know if you're yours down the line are there any lessons
+
+[08:11 - 08:16] Speaker 1:
+you were getting kind of pigeonholed as just this like social media
+
+[08:21 - 08:25] Speaker 1:
+turn on better than I thought some have gone slower
+
+[08:25 - 08:44] Speaker 1:
+the glasses I think is probably the best example of something that is going better the stylish they're good glasses it's a great form factor for AI we didn't know that AI was going to be a thing when we started working on that project or I mean we thought it was going to be a thing like 10 years from now but if you asked me five years ago I would have guessed that are would come before AI not the other
+
+[08:44 - 08:59] Speaker 1:
+when they come in Sequoia calls AI the 600 billion dollar question there's all this investment and chips and the infrastructure and the data centres but when does it start paying off
+
+[08:59 - 09:04] Speaker 1:
+like is it a bubble and if not like when do you start
+
+[09:04 - 09:08] Speaker 0:
+ping the money
+
+[09:11 - 09:25] Speaker 1:
+ends up being the things that were very valuable over time and it's just more of a question of timing like you're asking right even the.com bubble it's like there's all this fiber layered and it ended up being super valuable but it just wasn't as valuable as quickly as people thought so
+
+[09:25 - 09:36] Speaker 1:
+is that going to happen here I don't know I mean it's it's hard to predict what's going to happen in the next few years I think AI is going to be very fundamental I think that there's a meaningful chance that a lot of the companies are over building
+
+[09:36 - 10:00] Speaker 1:
+billions of dollars more than we had to but on the flip side I actually think all the companies that are investing are making a rational decision because the downside of being behind is that you're out of position for like the most important technology for the next 10 to 15 years you said your goal is getting to artificial general intelligence or AGI how do you define
+
+[10:00 - 10:04] Speaker 1:
+AGI and do you get there first
+
+[10:07 - 10:23] Speaker 1:
+level four and our goal is to completely closed the Gap with all the others on that so I don't know I'm going to do we get to AGI first time and I think that they'll probably be some breakthroughs between now and then it's hard to just predict in a straight line then you get some more complicated question which is like what is it
+
+[10:23 - 10:27] Speaker 1:
+I don't know that there's like one specific definition for this
+
+[10:27 - 10:31] Speaker 1:
+play some cuz I think intelligence
+
+[10:34 - 10:56] Speaker 1:
+one number that is your intelligence so there's probably a specific aspect of intelligence or modality which is like reading people's faces and emotions and that's something that I care about so I think we'll probably try to build that in at some point you know what we're trying to help enable the whole Community to do is create all these different AIS for all these things that people want to do and that's that's kind of how I think the sends up being a good thing
+
+[11:09 - 11:13] Speaker 1:
+the real world from YouTube virtual
+
+[11:17 - 11:22] Speaker 1:
+there too but it just kind of nice to spend time up here
+
+[11:30 - 11:41] Speaker 1:
+how many days I think the most important thing is just like learning how to think critically and learning values when you're young no one of our daughters is super creative
+
+[11:41 - 11:44] Speaker 0:
+wrote this outline
+
+[11:44 - 11:48] Speaker 1:
+for a novel that you want to ride and I was like 40 pages in and
+
+[11:48 - 12:03] Speaker 1:
+reset 101 hang out with her we'll use meta AI to generate the images like it's about mermaid crystals I know if you want to read that I think it's probably going to be a banger I mean this is some of the hiring philosophy that I have
+
+[12:03 - 12:09] Speaker 1:
+if people have shown that they can go deep and do one thing really well
+
+[12:09 - 12:17] Speaker 1:
+then they've probably gained experience in like the art of learning something and then taking it to an excellent level which is generally pretty applicable
+
+[12:17 - 12:27] Speaker 1:
+how do you make time for it all the the sports the side quest the super engaged CEO
+
+[12:32 - 12:35] Speaker 0:
+things that you do helps make you do all the things better
+
+[12:44 - 12:49] Speaker 1:
+the flexibility in space to
+
+[12:52 - 12:56] Speaker 1:
+interesting and well-rounded person and learning
+
+[12:56 - 13:04] Speaker 0:
+like you you want to have different experiences
+
+[13:04 - 13:09] Speaker 1:
+I know you've always been fascinated by
+
+[13:09 - 13:13] Speaker 1:
+China and you learn to speak Mandarin and what do you know about where China is
+
+[13:13 - 13:18] Speaker 0:
+turn on AI and AGI
+
+[13:35 - 13:43] Speaker 1:
+office on on just kind of open and decentralized Innovation I mean that's the way our economy works that's how we build awesome stuff
+
+[13:43 - 14:00] Speaker 1:
+government and make sure that that are kind of National Defense and things like that have sort of a Perpetual first mover advantage on on the leading technology in the world so we win the AI Wars this way
+
+[14:00 - 14:18] Speaker 1:
+I just don't know if that's if that's a reasonable goal so I'm not sure if you can maintain that but what I do think is a reasonable goal is maintaining a Perpetual you know
+
+[14:18 - 14:51] Speaker 1:
+set alarm to 8 month lead by making sure that the American company is in the American folks working on this continue producing the best AI systems and I think if the US can maintain that advantage over time that's just a very big Advantage they're obviously a lot of players what do you make of Sam Altman's leadership he deserves a lot of credit for for how that organization has has developed also having gotten a lot of public scrutiny myself I think it's like look when you're going through it for the first time you don't
+
+[14:51 - 15:18] Speaker 1:
+as perfectly as you would like but I think he's handling it very gracefully I think he's doing better than I did and it's it's somewhat ironic thing to have an organization that's named open AI but is sort of the leader in Building closed AI models and it's not necessarily bad but it's it's it's it's it's kind of a little funny Facebook and you have been blamed for a lot of things whether you agree or not why should we trust you with AI it's a loaded question
+
+[15:18 - 15:37] Speaker 1:
+all this stuff seriously and I think we've tried to handle all this as well as possible I'm not sure that it's all been fair but like I'd like to think that we're an important and relevant company so I think the screen is generally healthy one of the defining things around open sour
+
+[15:37 - 15:49] Speaker 1:
+is that anyone can scrutinize the work and because of that I think it just puts a lot of pressure to make sure that the quality of the work that you're doing gets better really quickly I want to talk about the 2024 presidential election
+
+[15:49 - 15:59] Speaker 1:
+Facebook has been a Flashpoint in many elections around the world and you personally have been called out most recently by former president
+
+[15:59 - 16:02] Speaker 0:
+this is a big election
+
+[16:02 - 16:06] Speaker 0:
+what do you think is at stake well
+
+[16:06 - 16:12] Speaker 1:
+historic election the main thing that I hear from
+
+[16:12 - 16:20] Speaker 1:
+because they come to our services to connect with people
+
+[16:20 - 16:24] Speaker 0:
+so you know that's what we're going to do
+
+[16:28 - 16:37] Speaker 1:
+I've done some stuff personally in the past I'm not planning on doing that
+
+[16:37 - 16:49] Speaker 1:
+time and that includes you know not endorsing either of the candidates not like there's obviously a lot of crazy stuff going on in the world I mean seeing Donald Trump get get up after getting shot in
+
+[16:49 - 16:53] Speaker 1:
+bass and pump is fist in the air with the American
+
+[16:53 - 17:00] Speaker 1:
+bag is one of the most badass things I've ever seen in my life but but look I mean
+
+[17:05 - 17:08] Speaker 1:
+like hard to not get kind of emotional about that
+
+[17:16 - 17:21] Speaker 1:
+here is to make it so everyone can express their views on
+
+[17:21 - 17:36] Speaker 1:
+lights off and I think that that's probably the best role that we can play we're facing a crisis in mental health especially on teenagers the Surgeon General is now calling for a warning label on social media saying that it's partially to blame with everything that
+
+[17:36 - 17:39] Speaker 0:
+now now does he have a point
+
+[17:39 - 17:43] Speaker 0:
+there's clearly an issue with mental health in the country
+
+[17:46 - 17:51] Speaker 1:
+everything and for kids and teens especially important and I think the focus on that is
+
+[17:51 - 17:55] Speaker 1:
+and I have three young girls
+
+[17:55 - 17:59] Speaker 0:
+and being a parent is hard
+
+[17:59 - 18:03] Speaker 1:
+and like you care like you just want to make sure that they have like good live
+
+[18:03 - 18:09] Speaker 1:
+and so like from that perspective what I
+
+[18:09 - 18:21] Speaker 1:
+to do is build our services in a way that's aligned with parents giving them the controls that they need to basically oversee how the services work for their for their kids what the data says
+
+[18:21 - 18:36] Speaker 1:
+today is a little bit different from what the basic meme is that's out there I think a lot of people kind of act as if there's been this proven connection between these and I just don't think that the science supports that today might be that kind of phones have an issue right if you're getting kind of
+
+[18:49 - 19:04] Speaker 1:
+how do you wrestle with those two Ambitions well I don't know that they're at odds I know there's like a bunch of people in The Tech Community think like oh well just like separate out our Consciousness and intelligence and upload it to the
+
+[19:19 - 19:22] Speaker 0:
+kind of the energy in like the love and all those things are
+
+[19:25 - 19:33] Speaker 0:
+a person
+
+[19:50 - 19:53] Speaker 0:
+what's Mark's
+
+[19:53 - 20:06] Speaker 1:
+tell me a joke so like sometimes when Mark has a fail with the kids he'll just say like not my best work not my best work that's just like a thing he says
+
+[20:28 - 20:33] Speaker 1:
+how much energy he needs to burn off energy every single day how do you keep up I mean how does anyone
+
+[20:40 - 20:44] Speaker 1:
+how successful I am depends on how good
+
+[21:04 - 21:15] Speaker 0:
+Family Sports motto your body knows what to do I'm ready ready ready ready to rock radio
+
+[21:42 - 22:16] Speaker 0:
+show me
+
+[22:16 - 22:20] Speaker 0:
+you've been at this for 20 years how long do you want to keep doing
+
+[22:31 - 22:34] Speaker 0:
+10 or 15 year chapters I think like AI is going to take
+
+[22:34 - 22:38] Speaker 1:
+all the work in the next computing
+
+[23:07 - 23:10] Speaker 0:
+give me the opposite you know when I was getting started with
+
+[23:32 - 23:36] Speaker 0:
+I'm pretty optimistic
+
+[23:44 - 23:50] Speaker 1:
+so I have an idea about how to protect us I brought you some sunscreen this is like
+
+[23:50 - 23:53] Speaker 0:
+the amount of sunscreen that I need so
+
+[23:53 - 24:01] Speaker 0:
+so I appreciate that

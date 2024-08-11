@@ -156,13 +156,8 @@ def process_transcript_file(input_file, output_file):
 
     return cleaned_transcript
 
-@app.route('/')
-def index():
-    return render_template('index.html')
 
-@app.route('/transcribe', methods=['POST'])
-def transcribe_video():
-    try:
+def create_clean_transcript():
         url = request.form['url']
         logging.info(f"Received transcription request for URL: {url}")
         
@@ -187,13 +182,30 @@ def transcribe_video():
         input_file = "transcription.txt"
         output_file = "cleaned_transcript.txt"
         cleaned_transcript = process_transcript_file(input_file, output_file)
+        
+        return cleaned_transcript
 
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/transcribe', methods=['POST'])
+def transcribe_video():
+    try:
+        #if we wanna run the whole transcription process
+        #transcription = create_clean_transcript()
+
+        #if we just want to use the local cleaned_transcript.txt
+        with open("cleaned_transcript.txt", "r") as file:
+            transcription = file.read()
+         
         if transcription.startswith("Error"):
             logging.error(f"Error during transcription: {transcription}")
             return jsonify({'error': transcription}), 400
         
         logging.info("Transcription process completed successfully")
-        return jsonify({'transcription': cleaned_transcript})
+        cleaned_transcript_html = transcription.replace("\n", "<br>")
+        return jsonify({'transcription': cleaned_transcript_html})
     except Exception as e:
         logging.error(f"Unexpected error in transcribe_video route: {str(e)}")
         return jsonify({'error': f"Unexpected error: {str(e)}"}), 500
