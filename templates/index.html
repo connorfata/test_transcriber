@@ -47,7 +47,7 @@
                     type: 'POST',
                     data: {url: url},
                     success: function(data) {
-                        $('#output').text(data.transcription);
+                        $('#output').html(data.transcription);
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
                         var errorMessage = 'An error occurred while transcribing.';

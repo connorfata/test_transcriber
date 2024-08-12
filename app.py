@@ -2,10 +2,11 @@ from flask import Flask, render_template, request, jsonify
 import yt_dlp
 import speech_recognition as sr
 from pydub import AudioSegment
-import os
+import os 
 import logging
 from pyAudioAnalysis import audioSegmentation as aS
 from datetime import timedelta
+import re
 
 app = Flask(__name__)
 
@@ -108,14 +109,55 @@ def transcribe_audio(audio_file):
     except Exception as e:
         logging.error(f"Unexpected error during transcription: {str(e)}")
         return f"Error: Unexpected error during transcription: {str(e)}"
+    
 
-@app.route('/')
-def index():
-    return render_template('index.html')
 
-@app.route('/transcribe', methods=['POST'])
-def transcribe_video():
-    try:
+def clean_transcript(transcript):
+    # Remove timestamps using a regular expression
+    transcript = re.sub(r'\[\d{2}:\d{2} - \d{2}:\d{2}\]', '', transcript)
+    
+    # Initialize an empty string to hold the cleaned transcript
+    cleaned_transcript = ""
+    last_speaker = None
+
+    for line in transcript.splitlines():
+        # Check if the line starts with "Speaker n:"
+        speaker_match = re.match(r'(Speaker \d):', line.strip())
+        
+        if speaker_match:
+            current_speaker = speaker_match.group(0)
+            # Add the speaker label only if it's different from the last one
+            if current_speaker != last_speaker:
+                # Add a newline before the speaker label
+                cleaned_transcript += f"\n{current_speaker} "
+                last_speaker = current_speaker
+            # Append the rest of the line without the speaker label
+            cleaned_transcript += line[len(current_speaker)+1:].strip() + " "
+        else:
+            # If it's not a speaker line, just add the line
+            cleaned_transcript += line.strip() + " "
+    
+    return cleaned_transcript.strip()
+
+# Function to read the transcript from a file, clean it, and save the result
+def process_transcript_file(input_file, output_file):
+    # Read the content of the transcript file
+    with open(input_file, "r") as file:
+        transcript = file.read()
+    
+    # Clean the transcript
+    cleaned_transcript = clean_transcript(transcript)
+    
+    # Save the cleaned transcript to a new file
+    with open(output_file, "w") as file:
+        file.write(cleaned_transcript)
+    
+    print(f"Cleaned transcript saved to {output_file}")
+
+    return cleaned_transcript
+
+
+def create_clean_transcript():
         url = request.form['url']
         logging.info(f"Received transcription request for URL: {url}")
         
@@ -127,17 +169,47 @@ def transcribe_video():
         
         transcription = transcribe_audio(audio_file)
         os.remove(audio_file)  # Clean up the temporary file
+        # Specify the file name and path
+        file_path = "transcription.txt"
+
+        # Write the transcription to a text file
+        with open(file_path, "w") as file:
+            file.write(transcription)
+
+        print(f"Transcription saved to {file_path}")
+
+        # Example usage
+        input_file = "transcription.txt"
+        output_file = "cleaned_transcript.txt"
+        cleaned_transcript = process_transcript_file(input_file, output_file)
         
+        return cleaned_transcript
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/transcribe', methods=['POST'])
+def transcribe_video():
+    try:
+        #if we wanna run the whole transcription process. If not add # before line below
+        transcription = create_clean_transcript()
+
+        #if we just want to use the local cleaned_transcript.txt
+        with open("cleaned_transcript.txt", "r") as file:
+            transcription = file.read()
+         
         if transcription.startswith("Error"):
             logging.error(f"Error during transcription: {transcription}")
             return jsonify({'error': transcription}), 400
         
         logging.info("Transcription process completed successfully")
-        return jsonify({'transcription': transcription})
+        cleaned_transcript_html = transcription.replace("\n", "<br><br>")
+        return jsonify({'transcription': cleaned_transcript_html})
     except Exception as e:
         logging.error(f"Unexpected error in transcribe_video route: {str(e)}")
         return jsonify({'error': f"Unexpected error: {str(e)}"}), 500
+    
 
 if __name__ == '__main__':
     app.run(debug=True)
-

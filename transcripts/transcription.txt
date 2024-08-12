@@ -1,0 +1,314 @@
+[00:03 - 00:08] Speaker 0:
+have you heard the term zakka songs
+
+[00:15 - 00:20] Speaker 1:
+what is this
+
+[00:20 - 00:25] Speaker 0:
+everything you do seems to be
+
+[00:44 - 01:00] Speaker 0:
+Mark Zuckerberg the face of Facebook has been under the bright lights for 20 years on the offensive buying Instagram WhatsApp and Oculus and the defensive battling a never-ending Cascade of criticisms about the social political and business impacts of his EXP
+
+[01:00 - 01:22] Speaker 0:
+sing Empire lately though Zuckerberg appears to be Reinventing himself and his company met his latest push is a major play to open source AI in contrast to closed Source competitors like openai and Google Zuckerberg predicts his company's newest AI models will have a profound impact on the progress of Technology business and maybe the
+
+[01:22 - 01:36] Speaker 0:
+I come to meta HQ to get a glimpse of the real suck and the AI future he believes is the path forward so I found an article in the Harvard Crimson going back to 2003 where you were talking about
+
+[01:36 - 01:41] Speaker 0:
+open source like over 20 years ago so you've been thinking about this a really long
+
+[01:41 - 01:45] Speaker 1:
+well yeah it's a big part of the
+
+[01:45 - 02:06] Speaker 1:
+it's more cost efficient and that's how you can start something like this in a
+
+[02:06 - 02:13] Speaker 0:
+some people see you as an unlikely champion of Open Source today you're laughing
+
+[02:19 - 02:25] Speaker 1:
+have been pretty big proponents of open source for a while and
+
+[02:25 - 02:37] Speaker 1:
+that kind of standardized a lot of the infrastructure
+
+[02:45 - 02:50] Speaker 0:
+for the future how much of this is a strategic
+
+[02:50 - 02:53] Speaker 1:
+quiet controller on the next technology wave
+
+[02:53 - 03:02] Speaker 1:
+was building our apps through phone platforms that are competitors controlled so
+
+[03:13 - 03:32] Speaker 1:
+for the next generation of technology I want us to build and have more control over the next set of platforms that we're going to build so I think AI is a critical one and I think augmented and virtual reality is another critical one it's kind of
+
+[03:32 - 03:46] Speaker 1:
+the way that we can control our own destiny on this and make sure that we have access to Leading AI is by building it and having it become an industry standard but actually gets stronger by being able to share it and and have the ecosystem around it
+
+[03:46 - 03:53] Speaker 0:
+you're continuing to improve meta AI across all of your products but also as a standalone chatbot why should we use
+
+[03:53 - 04:17] Speaker 1:
+as you enter the keystrokes it's just really cool
+
+[04:17 - 04:32] Speaker 1:
+my goal for the media I launched which I mean it's only really a few months old at this point was to by the end of the year have met AI be the most used AI assistant in the world and I think we're on track for that I mean there's hundreds of
+
+[04:32 - 04:35] Speaker 1:
+at the end of this year
+
+[04:35 - 04:43] Speaker 0:
+big and small including the biggest open source model ever
+
+[04:43 - 04:55] Speaker 1:
+is you use it as a teacher to train smaller models that they use in different applications
+
+[05:01 - 05:17] Speaker 1:
+build custom models for what they're doing and it's really hard to do that with closed systems out there with vets open AI or Gemini Google thing or whatever and this is like it gets to a pretty core part of
+
+[05:28 - 05:42] Speaker 1:
+people trying to create a god
+
+[05:42 - 06:03] Speaker 1:
+that they can like
+
+[06:03 - 06:17] Speaker 1:
+artistic artifact that they're putting out there for their community that allows their Community to interact with them but also gives them control over how that interaction happens and I think that
+
+[06:20 - 06:32] Speaker 0:
+will we have ai generated influencers with AI generated captions and avatars talking to avatars
+
+[06:39 - 06:58] Speaker 1:
+is role-playing difficult social interactions that they're going to have so whether it's in a professional contacts like okay you want to ask your manager for a raise or like I'm having this hard conversation with my girlfriend
+
+[06:58 - 07:06] Speaker 0:
+are my friends play this conversation with you
+
+[07:06 - 07:13] Speaker 1:
+social repercussion for what you
+
+[07:13 - 07:16] Speaker 0:
+but what evidence do you have that people want to live
+
+[07:16 - 07:19] Speaker 0:
+virtual world and socialize with avatars
+
+[07:24 - 07:31] Speaker 1:
+but all the technology allows you to do that in a better and
+
+[07:35 - 07:53] Speaker 1:
+smartphones that we could primarily be taking photos and then the mobile networks got good so then you could be kind of sharing video and videos a lot richer and consuming videos a better experience I just don't think that's the end of the line I think it gets more
+
+[07:53 - 08:04] Speaker 0:
+immersive you rename your company meta you're still pouring billions of dollars are we as far as long as you thought we'd be you know a few years down the line are there any lessons
+
+[08:08 - 08:39] Speaker 1:
+reason why I did that is because I think we were getting kind of pigeonholed as just this like social media app company it was always going to be a very long-term thing I think something's have gone better than I thought some have gone slower the glasses I think is probably the best example of something that is going better their stylish they're good glasses it's a great form factor for AI we didn't know that I was going to be a thing when we started working on that project or I mean we thought it was going to be a thing like 10 years from now
+
+[08:39 - 08:50] Speaker 1:
+not the other direction so some of this is just about kind of setting ourselves up to ride the different ways
+
+[08:50 - 08:53] Speaker 0:
+Sequoia calls AI the 600 billion
+
+[08:56 - 09:04] Speaker 0:
+centers but when does it start paying off like is it a bubble and if not like when do you start seeing
+
+[09:04 - 09:07] Speaker 1:
+money
+
+[09:07 - 09:11] Speaker 0:
+I think bubbles are interesting because a lot of
+
+[09:11 - 09:26] Speaker 1:
+play bubbles ended up being things that were very valuable over time and it's just more of a question of timing like you're asking right even the cam bubble it's like there's all this fiber light and it ended up being super valuable but it just wasn't as valuable as quickly as people thought so
+
+[09:26 - 09:54] Speaker 1:
+is that going to happen here I don't know I mean it's it's hard to predict what's going to happen in the next few years I think AI is going to be very fundamental I think that there's a meaningful chance that a lot of the companies are over building now and that you look back and you're like oh maybe I'll spend some number of billions of dollars more than we had to but on the flip side I actually think all the companies that are investing are making a rational decision because the downside of being behind is that you're out of position for like the most important technology for the next 10 to 15
+
+[09:54 - 09:57] Speaker 0:
+you said your goal is getting to artificial
+
+[09:57 - 10:03] Speaker 0:
+how do you define AGI and do you get
+
+[10:03 - 10:23] Speaker 1:
+and our goal is to completely closed the Gap with all the others on that so I don't know I mean do we get to AGI first time and I think that they'll probably be some breakthroughs between now and then it's hard to just predict in a straight line then you get to the more complicated question which is like what is it
+
+[10:23 - 11:01] Speaker 1:
+intelligence so there's probably a specific aspect of intelligence or modality which is like reading people's faces and emotions and that's something that I care about so I think we'll probably try to build that in at some point you know what we're trying to help enable the whole Community to do is create all these different AIS for all these things that people want to do and that's that's kind of how I think the Suns up being a good thing for the world
+
+[11:06 - 11:09] Speaker 1:
+is this like your Escape you're Oasis
+
+[11:13 - 11:17] Speaker 0:
+I like being in Palo Alto
+
+[11:17 - 11:28] Speaker 1:
+but it just kind of nice to spend time up here over the summer and you know get the kids out in the lake and teach them some different sports and that's all nice
+
+[11:28 - 11:33] Speaker 1:
+what should kids be studying these days
+
+[11:33 - 11:42] Speaker 1:
+I think the most important thing is just like learning how to think critically and learning values when you're young no one of our daughters is super creative I mean cheap
+
+[11:42 - 11:45] Speaker 0:
+wrote this outline and for a
+
+[11:45 - 11:55] Speaker 1:
+do you want to ride and I was like 40 pages in and you know we said and you don't hang out with her we'll use meta AI to generate the images like it's it's about mermaid crystals
+
+[12:05 - 12:18] Speaker 1:
+if people have shown that they can go deep and do one thing really well then they've probably gained experience in like the art of learning something and then taking it to an excellent level which is generally pretty applicable to other things
+
+[12:18 - 12:22] Speaker 0:
+can you go all in on everything you do it seems like how do you make
+
+[12:22 - 12:28] Speaker 0:
+being
+
+[12:28 - 12:37] Speaker 1:
+I actually think of having balance between the different things that you do helps make you do all the things better I think I'm pretty intense
+
+[12:37 - 12:51] Speaker 1:
+I want to make sure that people have have the flexibility in space to go do their thing
+
+[12:51 - 13:02] Speaker 1:
+interesting and well-rounded person and learning is like you you want to have different experiences
+
+[13:02 - 13:13] Speaker 0:
+I know you've always been fascinated by China and you learn to speak Mandarin and what do you know about
+
+[13:56 - 14:33] Speaker 1:
+is maintaining a Perpetual you know 6 months to 8 month lead by making sure that the American company is in the American folks working on this continue producing the best AI systems and I think if the US can maintain that advantage over time that's just a
+
+[14:33 - 14:37] Speaker 0:
+play Big Advantage there are obviously a lot of players what do you make
+
+[14:37 - 15:09] Speaker 1:
+he deserves a lot of credit for for how that organization has has developed also haven't gotten a lot of public scrutiny myself I think it's like look when you're going through it for the first time you don't handle it is as perfectly as you would like but I think he's handling it very gracefully I think he's doing better than I did and it's it's someone I ironic thing to have an organization that's named to open AI but is sort of the leader in Building closed day I models and it's not necessarily bad but it's it's it's kind of
+
+[15:09 - 15:15] Speaker 0:
+Facebook and you have been blamed for a lot of things whether you agree or not why should we
+
+[15:15 - 15:45] Speaker 1:
+seriously and I think we've tried to handle all this as well as possible I'm not sure that it's all been fair but like I'd like to think that we're an important and relevant company so I think the scrutiny is generally healthy one of the defining things around open source is that anyone can scrutinize the work and because of that I think it just puts a lot of pressure to make sure that the quality of the work that you're doing gets better really quick
+
+[15:45 - 15:56] Speaker 0:
+I want to talk about the 2024 presidential election Facebook has been a Flashpoint in many elections around the world and you personally have been called out
+
+[15:56 - 16:00] Speaker 0:
+most recently by former president Trump this is a big
+
+[16:00 - 16:10] Speaker 1:
+what do you think is at stake well I mean it's obviously a very important and it'll be a hist
+
+[16:10 - 16:21] Speaker 1:
+the main thing that I hear from people is that they actually want to see less political content on our services because they come to our services to connect with people so
+
+[16:21 - 16:43] Speaker 1:
+trying to recommend less political content so I think you're going to see our services play less of a role in this election and they have in the past and I've done some stuff personally in the past I'm not planning on doing that this time and then includes you know not endorsing either of the candidates
+
+[16:43 - 17:24] Speaker 1:
+fist in the air with the American flag is one of the most badass things I've ever seen in my life but but look I mean it's you know as and I think it's some level is an American it's like hard to not get kind of emotional about that that's why a lot of people like the guy but I do here is to make it so everyone can express their views on this stuff and I think that that's probably the best
+
+[17:24 - 17:29] Speaker 1:
+we're facing a crisis in mental health especially among teenagers
+
+[17:29 - 17:34] Speaker 0:
+the Surgeon General is now calling for a warning label on social media saying that it's
+
+[17:34 - 17:38] Speaker 0:
+play to blame with everything that you know now does he have
+
+[17:38 - 18:19] Speaker 1:
+and I think the focus on that is right and I have three young girls and being a parent is hard and like you care like you just want to make sure that they have like good lives and so like from that perspective what I aim for us to do is build our services in a way that's aligned with parents giving them the controls that they need to basically oversee how the services work for their for their kids
+
+[18:19 - 18:48] Speaker 1:
+what's the data says today is a little bit different from what the basic meme is that's out there I think a lot of people kind of act as if there's been this proven connection between these and I just don't think that the science supports that today might be that kind of phones have an issue right if you're getting kind of if you're you're getting notified for something or its buzzing you and it's like preventing you from sleeping I mean that is different from from social media but look I mean they're clearly issues here across society and we want to make sure we're part of
+
+[18:48 - 18:57] Speaker 0:
+how do you wrestle with those two ambitions
+
+[19:25 - 19:28] Speaker 0:
+a person
+
+[19:32 - 19:43] Speaker 0:
+you're going to teach me how to wake up I heard from Hawaii and I have served before but I'm not a surfer I hear your answer
+
+[19:51 - 19:56] Speaker 0:
+what's Mark's best dad joke so like sometimes when Mark has
+
+[19:56 - 20:00] Speaker 0:
+call with the cat until just say like not your not my best work
+
+[20:11 - 20:14] Speaker 0:
+you're not my best to work but now the kids will bring him and go to bed
+
+[20:14 - 20:17] Speaker 0:
+what's it been like for you being in a relationship
+
+[20:17 - 20:22] Speaker 0:
+all of this like for so long I think being in nature
+
+[20:22 - 20:25] Speaker 1:
+it's like doing sports is like
+
+[20:25 - 20:30] Speaker 0:
+so important especially for Market Marcus so much energy he needs to
+
+[20:30 - 20:33] Speaker 0:
+turn off energy every single day how do you keep up I mean how does anyone
+
+[20:33 - 20:40] Speaker 0:
+stop why don't it's fine he can do his own thing will mark supposed to teach me so
+
+[20:40 - 20:44] Speaker 0:
+how successful I am depends on how good of a teach
+
+[21:04 - 21:07] Speaker 0:
+Family Sports motto your body knows what to do
+
+[21:07 - 21:10] Speaker 1:
+I'm ready to read
+
+[21:10 - 21:14] Speaker 0:
+ready to rock radio
+
+[21:32 - 21:35] Speaker 1:
+can you hear me
+
+[21:44 - 21:51] Speaker 1:
+lower so easy
+
+[22:15 - 22:22] Speaker 0:
+you've been at this for 20 years how long do you want to keep doing this like you have all this
+
+[22:35 - 22:41] Speaker 1:
+nearest to fully materialize as well all the work in the next Computing platforms that we're doing
+
+[22:53 - 22:57] Speaker 1:
+I just think that
+
+[23:05 - 23:11] Speaker 1:
+you know when I was getting started with with my
+
+[23:15 - 23:19] Speaker 0:
+how to build the idea that I had and in the future you may not even need
+
+[23:30 - 23:35] Speaker 0:
+I'm pretty
+
+[23:35 - 23:43] Speaker 1:
+optimistic about that kind of grand art here
+
+[23:43 - 23:51] Speaker 0:
+so I have an idea about how to protect us I brought you some sunscreen this is like a
+
+[23:51 - 23:56] Speaker 0:
+what's the amount of sunscreen that I need so sorry I appreciate that
