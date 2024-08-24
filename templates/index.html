@@ -3,62 +3,202 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YouTube Transcriber</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>Scribe_</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            max-width: 800px;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
             margin: 0 auto;
+            padding: 0 20px;
+        }
+        header {
+            background-color: #000;
+            color: #fff;
+            padding: 10px 0;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        nav {
+            margin-top: 10px;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-right: 15px;
+        }
+        .main-content {
+            display: flex;
+            margin-top: 20px;
+        }
+        .left-column {
+            flex: 2;
+            padding-right: 20px;
+        }
+        .right-column {
+            flex: 1;
+            background-color: #f4f4f4;
             padding: 20px;
         }
-        #url {
-            width: 100%;
-            padding: 10px;
+        .article {
+            margin-bottom: 30px;
+            border: 1px solid #e0e0e0;
+            padding: 15px;
+            cursor: pointer;
+            transition: box-shadow 0.3s ease;
+        }
+        .article:hover {
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .article h2 {
+            font-size: 24px;
             margin-bottom: 10px;
+            color: #000;
         }
-        #transcribe {
-            padding: 10px 20px;
+        .article-meta {
+            font-size: 14px;
+            color: #666;
         }
-        #output {
-            margin-top: 20px;
-            border: 1px solid #ccc;
-            padding: 10px;
-            min-height: 200px;
+        .sidebar-item {
+            margin-bottom: 20px;
         }
-        .error {
-            color: red;
+        .sidebar-item h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
-    <h1>YouTube Transcriber</h1>
-    <input type="text" id="url" placeholder="Enter YouTube URL">
-    <button id="transcribe">Transcribe</button>
-    <div id="output"></div>
+    <header>
+        <div class="container">
+            <div class="logo" onclick="window.location.href='/'">The Wall Street Journal</div>
+            <nav>
+                <a href="/">Home</a>
+                <a href="#">World</a>
+                <a href="#">U.S.</a>
+                <a href="#">Politics</a>
+                <a href="#">Economy</a>
+                <a href="#">Business</a>
+                <a href="#">Tech</a>
+                <a href="#">Markets</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="main-content">
+            <div class="left-column" id="articles-container">
+                <!-- Articles will be dynamically inserted here -->
+            </div>
+            <div class="right-column">
+                <div class="sidebar-item">
+                    <h3>Markets</h3>
+                    <div id="markets-data">
+                        <!-- Market data will be dynamically inserted here -->
+                    </div>
+                </div>
+                <div class="sidebar-item">
+                    <h3>Most Popular Articles</h3>
+                    <ol id="popular-articles">
+                        <!-- Popular articles will be dynamically inserted here -->
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script>
-        $(document).ready(function() {
-            $('#transcribe').click(function() {
-                var url = $('#url').val();
-                $('#output').text('Transcribing...');
-                $.ajax({
-                    url: '/transcribe',
-                    type: 'POST',
-                    data: {url: url},
-                    success: function(data) {
-                        $('#output').html(data.transcription);
-                    },
-                    error: function(jqXHR, textStatus, errorThrown) {
-                        var errorMessage = 'An error occurred while transcribing.';
-                        if (jqXHR.responseJSON && jqXHR.responseJSON.error) {
-                            errorMessage = jqXHR.responseJSON.error;
-                        }
-                        $('#output').html('<span class="error">Error: ' + errorMessage + '</span>');
-                    }
-                });
+        // Function to fetch data from API
+        async function fetchData(endpoint) {
+            // Replace this with your actual API call to S3
+            // const response = await fetch(`https://your-s3-bucket-url.com/${endpoint}`);
+            // return await response.json();
+            
+            // Placeholder data
+            const placeholderData = {
+                articles: [
+                    { id: 1, title: "Breaking News: Major Economic Shift Announced", author: "John Doe", date: "August 23, 2024", content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." },
+                    { id: 2, title: "Tech Giants Face New Regulations", author: "Jane Smith", date: "August 23, 2024", content: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." }
+                ],
+                markets: [
+                    { index: "DJIA", change: "+0.5%" },
+                    { index: "S&P 500", change: "+0.3%" },
+                    { index: "NASDAQ", change: "+0.7%" }
+                ],
+                popularArticles: [
+                    "Global Trade Tensions Rise",
+                    "New AI Breakthrough Announced",
+                    "Housing Market Shows Signs of Cooling"
+                ]
+            };
+            return placeholderData[endpoint];
+        }
+
+        // Function to truncate text to 140 characters
+        function truncateText(text, limit = 140) {
+            if (text.length <= limit) return text;
+            return text.slice(0, limit) + '...';
+        }
+
+        // Function to render articles
+        function renderArticles(articles) {
+            const container = document.getElementById('articles-container');
+            container.innerHTML = ''; // Clear existing content
+            articles.forEach(article => {
+                const articleElement = document.createElement('div');
+                articleElement.className = 'article';
+                articleElement.onclick = () => window.location.href = `article.html?id=${article.id}`;
+                articleElement.innerHTML = `
+                    <h2>${article.title}</h2>
+                    <p class="article-meta">By ${article.author} | ${article.date}</p>
+                    <p>${truncateText(article.content)}</p>
+                `;
+                container.appendChild(articleElement);
             });
-        });
+        }
+
+        // Function to render market data
+        function renderMarketData(marketData) {
+            const container = document.getElementById('markets-data');
+            container.innerHTML = ''; // Clear existing content
+            marketData.forEach(item => {
+                const p = document.createElement('p');
+                p.textContent = `${item.index}: ${item.change}`;
+                container.appendChild(p);
+            });
+        }
+
+        // Function to render popular articles
+        function renderPopularArticles(articles) {
+            const container = document.getElementById('popular-articles');
+            container.innerHTML = ''; // Clear existing content
+            articles.forEach(article => {
+                const li = document.createElement('li');
+                li.textContent = article;
+                container.appendChild(li);
+            });
+        }
+
+        // Main function to fetch and render all data
+        async function main() {
+            const articles = await fetchData('articles');
+            const marketData = await fetchData('markets');
+            const popularArticles = await fetchData('popularArticles');
+
+            renderArticles(articles);
+            renderMarketData(marketData);
+            renderPopularArticles(popularArticles);
+        }
+
+        // Call the main function when the page loads
+        window.onload = main;
     </script>
 </body>
 </html>
