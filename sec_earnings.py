@@ -2,6 +2,10 @@ import sys
 from sec_edgar_downloader import Downloader
 import datetime
 import os
+import logging
+
+# Set up logging
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # Initialize the downloader with your company name and email address
 company_name = "scribe_"
@@ -23,76 +27,64 @@ def download_specific_sec_filing(ticker, filing_type="10-Q", year=None, quarter=
     :param output_dir: The directory where the filings will be saved
     """
     try:
+        logging.info(f"Starting download process for {ticker} {filing_type} filing for year {year}")
+        
         # Ensure the output directory exists
         os.makedirs(output_dir, exist_ok=True)
         dl.save_path = output_dir
+        logging.debug(f"Output directory set to: {os.path.abspath(output_dir)}")
 
         # Fetch the filings
-        print(f"Fetching {filing_type} filings for {ticker} from the SEC...")
-        filings = dl.get(filing_type, ticker)
+        logging.info(f"Fetching {filing_type} filings for {ticker} from the SEC...")
+        filings = dl.get(filing_type, ticker, amount=5)  # Fetch the 5 most recent filings
+        logging.debug(f"Number of filings downloaded: {filings}")
 
         if filings == 0:
-            print(f"No {filing_type} filings found for {ticker}.")
+            logging.warning(f"No {filing_type} filings found for {ticker}.")
             return
 
-        # List all downloaded files
-        print(f"\nAll downloaded {filing_type} filings for {ticker}:")
-        for file_name in os.listdir(output_dir):
+        # List all files in the output directory
+        logging.info(f"Listing all files in the output directory:")
+        all_files = os.listdir(output_dir)
+        for file_name in all_files:
+            logging.info(f"File in output directory: {file_name}")
+
+        # Find the file for the specified year
+        target_file = None
+        for file_name in all_files:
             if ticker.lower() in file_name.lower() and filing_type in file_name:
-                print(file_name)
-
-        # Iterate through the filings to find the one that matches the desired quarter and year
-        found = False
-        closest_year = None
-        closest_file = None
-
-        for file_name in os.listdir(output_dir):
-            if ticker.lower() not in file_name.lower() or filing_type not in file_name:
-                continue
-            
-            filing_date_str = file_name.split('-')[0]  # Assumes the date is at the start of the file name
-            try:
-                filing_date = datetime.datetime.strptime(filing_date_str, '%Y-%m-%d').date()
-                filing_quarter = get_quarter(filing_date.month)
-                
-                if filing_type == "10-Q" and filing_date.year == year and filing_quarter == quarter:
-                    print(f"\nFound exact match - Q{quarter} {year} 10-Q filing for {ticker}: {file_name}")
-                    found = True
+                file_date = file_name.split('-')[0]
+                file_year = int(file_date.split('-')[0])
+                if file_year == year:
+                    target_file = file_name
                     break
-                elif filing_type == "10-K" and filing_date.year == year:
-                    print(f"\nFound exact match - {year} 10-K filing for {ticker}: {file_name}")
-                    found = True
-                    break
-                
-                # Track the closest year if no exact match is found
-                if closest_year is None or abs(filing_date.year - year) < abs(closest_year - year):
-                    closest_year = filing_date.year
-                    closest_file = file_name
 
-            except ValueError:
-                print(f"Could not parse date from file name: {file_name}")
-
-        if found:
-            print(f"Successfully found the {filing_type} filing for {ticker}.")
-        elif closest_file:
-            print(f"\nNo exact match found. Closest {filing_type} filing for {ticker}: {closest_file}")
+        if target_file:
+            logging.info(f"Found {filing_type} filing for {ticker} for year {year}: {target_file}")
+            print(f"Successfully found {filing_type} filing for {ticker} for year {year}.")
+            print(f"File: {target_file}")
         else:
-            print(f"\nNo matching or close {filing_type} filing found for {ticker} for {'Q' + str(quarter) if quarter else ''} {year}.")
+            logging.warning(f"No {filing_type} filing found for {ticker} for year {year}.")
+            print(f"No {filing_type} filing found for {ticker} for year {year}.")
 
     except Exception as e:
-        print(f"Error downloading filings: {str(e)}")
+        logging.error(f"Error downloading filings: {str(e)}", exc_info=True)
 
 def get_user_input():
     """Get user input for filing details."""
     ticker = input("Enter the ticker symbol (e.g., AAPL): ").upper()
+    logging.info(f"User entered ticker: {ticker}")
     
     while True:
         filing_type = input("Enter the filing type (10-K or 10-Q): ").upper()
         if filing_type in ["10-K", "10-Q"]:
             break
+        logging.warning("Invalid filing type entered. Prompting user again.")
         print("Invalid filing type. Please enter either '10-K' or '10-Q'.")
+    logging.info(f"User entered filing type: {filing_type}")
     
     year = int(input("Enter the year (e.g., 2023): "))
+    logging.info(f"User entered year: {year}")
     
     quarter = None
     if filing_type == "10-Q":
@@ -100,14 +92,18 @@ def get_user_input():
             quarter = int(input("Enter the quarter (1-4): "))
             if 1 <= quarter <= 4:
                 break
+            logging.warning("Invalid quarter entered. Prompting user again.")
             print("Invalid quarter. Please enter a number between 1 and 4.")
+        logging.info(f"User entered quarter: {quarter}")
     
     return ticker, filing_type, year, quarter
 
 def main():
+    logging.info("Starting SEC filing downloader script")
     ticker, filing_type, year, quarter = get_user_input()
     output_dir = "sec_filings"
     download_specific_sec_filing(ticker, filing_type, year, quarter, output_dir)
+    logging.info("Script execution completed")
 
 if __name__ == "__main__":
     main()
