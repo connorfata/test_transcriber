@@ -1,3 +1,5 @@
+# This downloads podcast into a folder titled 'downloaded_podcast' #
+
 import os
 import requests
 import feedparser
