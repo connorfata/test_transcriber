@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 import requests
 import os
 from datetime import datetime
@@ -120,19 +120,6 @@ def get_financial_data(ticker, api_key):
                 }
             }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
             income_statement = {
                 'Revenue': {
                     'Total Revenue': format_number(latest_income_statement.get('totalRevenue')),
@@ -182,16 +169,33 @@ def get_financial_data(ticker, api_key):
                 "ratios": ratios,
                 "fiscal_date_ending": latest_balance_sheet.get('fiscalDateEnding')
             }
-        else:
-            return None
-    else:
-        return None
+    
+    # If we reach this point, either the API call failed or the data was not in the expected format
+    print(f"API Response (Balance Sheet): {balance_sheet_response.text}")
+    print(f"API Response (Income Statement): {income_statement_response.text}")
+    return None
 
-def get_news_sentiment(ticker, api_key):
+def get_stock_news(ticker, api_key):
     base_url = "https://www.alphavantage.co/query"
     params = {
         "function": "NEWS_SENTIMENT",
         "tickers": ticker,
+        "apikey": api_key,
+        "limit": 10
+    }
+    response = requests.get(base_url, params=params)
+    
+    if response.status_code == 200:
+        data = response.json()
+        if "feed" in data:
+            return data["feed"]
+    return None
+
+def get_macro_news(api_key):
+    base_url = "https://www.alphavantage.co/query"
+    params = {
+        "function": "NEWS_SENTIMENT",
+        "topics": "economy_macro",
         "apikey": api_key,
         "limit": 10
     }
@@ -209,15 +213,44 @@ def index():
         ticker = request.form['ticker'].upper()
         api_key = get_api_key()
         financial_data = get_financial_data(ticker, api_key)
-        news_sentiment = get_news_sentiment(ticker, api_key)
+        stock_news = get_stock_news(ticker, api_key)
         
         if financial_data:
-            return render_template('result.html', ticker=ticker, financial_data=financial_data, news_sentiment=news_sentiment)
+            return render_template('result.html', 
+                                   ticker=ticker, 
+                                   financial_data=financial_data, 
+                                   stock_news=stock_news)
         else:
-            error_message = f"No financial data found for {ticker}"
+            error_message = f"No financial data found for {ticker}. Please check the ticker symbol and try again."
             return render_template('index.html', error=error_message)
     
     return render_template('index.html')
+
+@app.route('/news')
+def news_page():
+    api_key = get_api_key()
+    macro_news = get_macro_news(api_key)
+    print("API Key:", api_key)  # Be careful not to log this in production
+    print("Macro News:", macro_news)
+    return render_template('news.html', macro_news=macro_news)
+
+def get_macro_news(api_key):
+    base_url = "https://www.alphavantage.co/query"
+    params = {
+        "function": "NEWS_SENTIMENT",
+        "topics": "economy_macro",
+        "apikey": api_key,
+        "limit": 10
+    }
+    response = requests.get(base_url, params=params)
+    print("API Response Status:", response.status_code)
+    print("API Response Content:", response.text[:500])  # Print first 500 characters
+    
+    if response.status_code == 200:
+        data = response.json()
+        if "feed" in data:
+            return data["feed"]
+    return None
 
 if __name__ == '__main__':
     app.run(debug=True)
