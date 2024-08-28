@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Statement Fetcher</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; padding: 20px; max-width: 800px; margin: 0 auto; }
+        form { margin-bottom: 20px; }
+        input[type="text"] { padding: 5px; font-size: 16px; }
+        input[type="submit"] { padding: 5px 10px; font-size: 16px; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <h1>Financial Statement Fetcher</h1>
+    <form method="POST">
+        <label for="ticker">Enter company ticker symbol:</label>
+        <input type="text" id="ticker" name="ticker" required>
+        <input type="submit" value="Fetch Financial Statements">
+    </form>
+    {% if error %}
+    <p class="error">{{ error }}</p>
+    {% endif %}
+</body>
+</html>
