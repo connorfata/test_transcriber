@@ -5,51 +5,98 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Comprehensive Financial Analysis for {{ ticker }}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', sans-serif;
             line-height: 1.6;
-            background-color: #f8f9fa;
+            background-color: #f0f2f5;
+            color: #333;
+        }
+        .navbar {
+            background-color: #1a237e;
+        }
+        .navbar-brand, .nav-link {
+            color: #fff !important;
+        }
+        .container {
+            max-width: 1200px;
+        }
+        h1, h2, h3, h4 {
+            color: #1a237e;
+            margin-bottom: 20px;
         }
         .financial-statement {
             background-color: white;
-            padding: 20px;
+            padding: 30px;
             margin-bottom: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        .financial-statement:hover {
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
         }
         table {
-            font-size: 0.9em;
+            font-size: 0.95em;
+            width: 100%;
         }
         th, td {
             padding: 8px;
         }
         td:nth-child(2) {
             text-align: right;
-            font-family: monospace;
+            font-family: 'Roboto Mono', monospace;
         }
         .news-item {
             background-color: white;
-            padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 5px;
-            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        .news-item:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
         }
         .sentiment {
             font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 20px;
+            display: inline-block;
         }
-        .positive { color: green; }
-        .negative { color: red; }
-        .neutral { color: gray; }
+        .positive { background-color: #e8f5e9; color: #2e7d32; }
+        .negative { background-color: #ffebee; color: #c62828; }
+        .neutral { background-color: #f5f5f5; color: #616161; }
         .ratio-item {
-            background-color: #e9ecef;
-            padding: 10px;
-            border-radius: 5px;
+            background-color: #e8eaf6;
+            padding: 15px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        .ratio-item:hover {
+            background-color: #c5cae9;
+        }
+        .btn-primary {
+            background-color: #1a237e;
+            border-color: #1a237e;
+        }
+        .btn-primary:hover {
+            background-color: #3949ab;
+            border-color: #3949ab;
+        }
+        .nav-tabs .nav-link {
+            color: #1a237e;
+        }
+        .nav-tabs .nav-link.active {
+            color: #fff;
+            background-color: #1a237e;
+            border-color: #1a237e;
         }
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="/">Financial Analysis Tool</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -61,22 +108,27 @@
                         <a class="nav-link" href="/">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/macro-news">Macro News</a>
+                        <a class="nav-link" href="/news">Macro News</a>
                     </li>
                 </ul>
+                <form class="d-flex ms-auto" action="{{ url_for('index') }}" method="post">
+                    <input class="form-control me-2" type="search" placeholder="Enter ticker symbol" aria-label="Search" name="ticker">
+                    <button class="btn btn-outline-light" type="submit">Search</button>
+                </form>
             </div>
         </div>
     </nav>
-
-    <div class="container mt-4">
-        <h1 class="mb-4">Comprehensive Financial Analysis for {{ ticker }}</h1>
-        <p>Fiscal Date Ending: {{ financial_data.fiscal_date_ending }}</p>
-        <p>All figures in millions of dollars</p>
+    <div class="container mt-5">
+        <h1 class="mb-4 text-center">Comprehensive Financial Analysis for {{ ticker }}</h1>
+        <p class="text-center">Fiscal Date Ending: {{ financial_data.fiscal_date_ending }}</p>
+        <p class="text-center text-muted">All figures in millions of dollars</p>
         
-        <a href="{{ url_for('macro_news') }}" class="btn btn-primary">View Macro News</a>
+        <div class="text-center mb-4">
+            <a href="{{ url_for('news_page') }}" class="btn btn-primary btn-lg">View Macro News</a>
+        </div>
         
-        <div class="row mt-4">
-            <div class="col-md-8">
+        <div class="row mt-5">
+            <div class="col-lg-8">
                 <div class="financial-statement">
                     <h2>Balance Sheet</h2>
                     {% for section, subsections in financial_data.balance_sheet.items() %}
@@ -85,36 +137,36 @@
                             {% for subsection, items in subsections.items() %}
                                 <h4>{{ subsection }}</h4>
                                 <table class="table table-striped table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Item</th>
-                                            <th>Amount</th>
-                                        </tr>
-                                    </thead>
                                     <tbody>
                                         {% if items is mapping %}
                                             {% for key, value in items.items() %}
-                                                <tr>
-                                                    <td>{{ key }}</td>
-                                                    <td>{{ value }}</td>
-                                                </tr>
+                                                {% if value != 'n/a' %}
+                                                    <tr>
+                                                        <td>{{ key }}</td>
+                                                        <td>{{ '{:,}'.format(value|float) }}</td>
+                                                    </tr>
+                                                {% endif %}
                                             {% endfor %}
                                         {% else %}
-                                            <tr>
-                                                <td>{{ subsection }}</td>
-                                                <td>{{ items }}</td>
-                                            </tr>
+                                            {% if items != 'n/a' %}
+                                                <tr>
+                                                    <td>{{ subsection }}</td>
+                                                    <td>{{ '{:,}'.format(items|float) }}</td>
+                                                </tr>
+                                            {% endif %}
                                         {% endif %}
                                     </tbody>
                                 </table>
                             {% endfor %}
                         {% else %}
-                            <table class="table table-striped table-hover">
-                                <tr>
-                                    <td>{{ section }}</td>
-                                    <td>{{ subsections }}</td>
-                                </tr>
-                            </table>
+                            {% if subsections != 'n/a' %}
+                                <table class="table table-striped table-hover">
+                                    <tr>
+                                        <td>{{ section }}</td>
+                                        <td>{{ '{:,}'.format(subsections|float) }}</td>
+                                    </tr>
+                                </table>
+                            {% endif %}
                         {% endif %}
                     {% endfor %}
                 </div>
@@ -124,25 +176,23 @@
                     {% for section, items in financial_data.income_statement.items() %}
                         <h3>{{ section }}</h3>
                         <table class="table table-striped table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Item</th>
-                                    <th>Amount</th>
-                                </tr>
-                            </thead>
                             <tbody>
                                 {% if items is mapping %}
                                     {% for key, value in items.items() %}
-                                        <tr>
-                                            <td>{{ key }}</td>
-                                            <td>{{ value }}</td>
-                                        </tr>
+                                        {% if value != 'n/a' %}
+                                            <tr>
+                                                <td>{{ key }}</td>
+                                                <td>{{ '{:,}'.format(value|float) }}</td>
+                                            </tr>
+                                        {% endif %}
                                     {% endfor %}
                                 {% else %}
-                                    <tr>
-                                        <td>{{ section }}</td>
-                                        <td>{{ items }}</td>
-                                    </tr>
+                                    {% if items != 'n/a' %}
+                                        <tr>
+                                            <td>{{ section }}</td>
+                                            <td>{{ '{:,}'.format(items|float) }}</td>
+                                        </tr>
+                                    {% endif %}
                                 {% endif %}
                             </tbody>
                         </table>
@@ -156,7 +206,7 @@
                             <div class="col-md-6 mb-3">
                                 <div class="ratio-item">
                                     <h4 class="mb-2">{{ key }}</h4>
-                                    <p class="mb-0">{{ value }}</p>
+                                    <p class="mb-0 fs-5">{{ '{:,}'.format(value|float) }}</p>
                                 </div>
                             </div>
                         {% endfor %}
@@ -164,8 +214,8 @@
                 </div>
             </div>
 
-            <div class="col-md-4">
-                <h2>Market News and Sentiment</h2>
+            <div class="col-lg-4">
+                <h2 class="mb-4">Market News and Sentiment</h2>
                 <ul class="nav nav-tabs" id="newsTabs" role="tablist">
                     <li class="nav-item" role="presentation">
                         <button class="nav-link active" id="stock-news-tab" data-bs-toggle="tab" data-bs-target="#stock-news" type="button" role="tab" aria-controls="stock-news" aria-selected="true">{{ ticker }} News</button>
@@ -179,36 +229,40 @@
                         {% if stock_news %}
                             {% for news in stock_news %}
                                 <div class="news-item">
-                                    <h5><a href="{{ news.url }}" target="_blank">{{ news.title }}</a></h5>
+                                    <h5><a href="{{ news.url }}" target="_blank" class="text-decoration-none">{{ news.title }}</a></h5>
                                     <p>{{ news.summary }}</p>
-                                    <small>Source: {{ news.source }} | {{ news.time_published }}</small>
+                                    <small class="text-muted">Source: {{ news.source }} | {{ news.time_published }}</small>
                                     {% if news.overall_sentiment_score is defined %}
-                                        <p class="sentiment {% if news.overall_sentiment_score > 0 %}positive{% elif news.overall_sentiment_score < 0 %}negative{% else %}neutral{% endif %}">
-                                            Sentiment: {{ news.overall_sentiment_label }} ({{ "%.2f"|format(news.overall_sentiment_score) }})
+                                        <p class="mt-2 mb-0">
+                                            <span class="sentiment {% if news.overall_sentiment_score > 0 %}positive{% elif news.overall_sentiment_score < 0 %}negative{% else %}neutral{% endif %}">
+                                                Sentiment: {{ news.overall_sentiment_label }} ({{ "%.2f"|format(news.overall_sentiment_score) }})
+                                            </span>
                                         </p>
                                     {% endif %}
                                 </div>
                             {% endfor %}
                         {% else %}
-                            <p>No stock-specific news available for {{ ticker }}.</p>
+                            <p class="text-muted">No stock-specific news available for {{ ticker }}.</p>
                         {% endif %}
                     </div>
                     <div class="tab-pane fade" id="macro-news" role="tabpanel" aria-labelledby="macro-news-tab">
                         {% if macro_news %}
                             {% for news in macro_news %}
                                 <div class="news-item">
-                                    <h5><a href="{{ news.url }}" target="_blank">{{ news.title }}</a></h5>
+                                    <h5><a href="{{ news.url }}" target="_blank" class="text-decoration-none">{{ news.title }}</a></h5>
                                     <p>{{ news.summary }}</p>
-                                    <small>Source: {{ news.source }} | {{ news.time_published }}</small>
+                                    <small class="text-muted">Source: {{ news.source }} | {{ news.time_published }}</small>
                                     {% if news.overall_sentiment_score is defined %}
-                                        <p class="sentiment {% if news.overall_sentiment_score > 0 %}positive{% elif news.overall_sentiment_score < 0 %}negative{% else %}neutral{% endif %}">
-                                            Sentiment: {{ news.overall_sentiment_label }} ({{ "%.2f"|format(news.overall_sentiment_score) }})
+                                        <p class="mt-2 mb-0">
+                                            <span class="sentiment {% if news.overall_sentiment_score > 0 %}positive{% elif news.overall_sentiment_score < 0 %}negative{% else %}neutral{% endif %}">
+                                                Sentiment: {{ news.overall_sentiment_label }} ({{ "%.2f"|format(news.overall_sentiment_score) }})
+                                            </span>
                                         </p>
                                     {% endif %}
                                 </div>
                             {% endfor %}
                         {% else %}
-                            <p>No macro-economic news available.</p>
+                            <p class="text-muted">No macro-economic news available.</p>
                         {% endif %}
                     </div>
                 </div>

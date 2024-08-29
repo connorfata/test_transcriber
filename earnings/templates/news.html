@@ -28,6 +28,11 @@
             padding: 20px;
             margin-bottom: 20px;
             border-bottom: 1px solid #ddd;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .news-item:hover {
+            background-color: #f0f0f0;
         }
         .news-item h3 {
             font-size: 1.5rem;
@@ -56,7 +61,24 @@
             padding-bottom: 5px;
             margin-bottom: 15px;
         }
+        .divider {
+            border-left: 1px solid #ddd;
+            height: 100%;
+        }
     </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const newsItems = document.querySelectorAll('.news-item');
+            newsItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const link = this.querySelector('a');
+                    if (link) {
+                        window.open(link.href, '_blank');
+                    }
+                });
+            });
+        });
+    </script>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark">
@@ -85,7 +107,7 @@
             <div class="row">
                 <div class="col-md-8">
                     <h2 class="section-title">Top Stories</h2>
-                    {% for news in macro_news[:3] %}
+                    {% for news in macro_news[:5] %}
                         <div class="news-item">
                             <h3><a href="{{ news.url }}" target="_blank" class="text-dark text-decoration-none">{{ news.title }}</a></h3>
                             <p>{{ news.summary }}</p>
@@ -94,6 +116,7 @@
                     {% endfor %}
                 </div>
                 <div class="col-md-4">
+                    <div class="divider"></div>
                     <h2 class="section-title">Latest Updates</h2>
                     {% for news in macro_news[3:] %}
                         <div class="news-item">
