@@ -1,12 +1,27 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, session, redirect, url_for
 import requests
 import os
 from datetime import datetime
+import logging
 
 app = Flask(__name__)
+app.secret_key = 'your_secret_key_here'  # Replace with a real secret key in production
+
+# Configure logging
+logging.basicConfig(level=logging.DEBUG)
+logger = logging.getLogger(__name__)
 
 def get_api_key():
-    return os.environ.get('ALPHA_VANTAGE_API_KEY', 'YOUR_API_KEY_HERE')
+    api_key = os.environ.get('ALPHA_VANTAGE_API_KEY')
+    if not api_key:
+        logging.warning("Alpha Vantage API key not set in environment variables")
+    return api_key
+
+def get_newsapi_key():
+    api_key = os.environ.get('NEWSAPI_KEY')
+    if not api_key:
+        logging.warning("NewsAPI key not set in environment variables")
+    return api_key
 
 def format_number(number):
     try:
@@ -36,7 +51,7 @@ def calculate_ratios(balance_sheet, income_statement):
         }
         return {k: f"{v:.2f}" if v is not None else "N/A" for k, v in ratios.items()}
     except Exception as e:
-        print(f"Error calculating ratios: {e}")
+        logger.error(f"Error calculating ratios: {e}")
         return {}
 
 def get_financial_data(ticker, api_key):
@@ -171,8 +186,8 @@ def get_financial_data(ticker, api_key):
             }
     
     # If we reach this point, either the API call failed or the data was not in the expected format
-    print(f"API Response (Balance Sheet): {balance_sheet_response.text}")
-    print(f"API Response (Income Statement): {income_statement_response.text}")
+    logger.error(f"API Response (Balance Sheet): {balance_sheet_response.text}")
+    logger.error(f"API Response (Income Statement): {income_statement_response.text}")
     return None
 
 def get_stock_news(ticker, api_key):
@@ -207,6 +222,26 @@ def get_macro_news(api_key):
             return data["feed"]
     return None
 
+def get_newsapi_articles():
+    newsapi_key = get_newsapi_key()
+    base_url = "https://newsapi.org/v2/top-headlines"
+    params = {
+        "apiKey": newsapi_key,
+        "country": "us",
+        "category": "business",
+        "pageSize": 10
+    }
+    logging.debug(f"Making request to NewsAPI: {base_url}")
+    response = requests.get(base_url, params=params)
+    logging.debug(f"NewsAPI response status code: {response.status_code}")
+    
+    if response.status_code == 200:
+        data = response.json()
+        if "articles" in data:
+            return data["articles"]
+    logging.error(f"Failed to fetch news from NewsAPI. Status code: {response.status_code}")
+    return None
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
@@ -214,25 +249,28 @@ def index():
         api_key = get_api_key()
         financial_data = get_financial_data(ticker, api_key)
         stock_news = get_stock_news(ticker, api_key)
+        macro_news = get_macro_news(api_key)
+        newsapi_articles = get_newsapi_articles()
         
         if financial_data:
             return render_template('result.html', 
                                    ticker=ticker, 
                                    financial_data=financial_data, 
-                                   stock_news=stock_news)
+                                   stock_news=stock_news,
+                                   macro_news=macro_news,
+                                   newsapi_articles=newsapi_articles)
         else:
             error_message = f"No financial data found for {ticker}. Please check the ticker symbol and try again."
             return render_template('index.html', error=error_message)
-    
+        
     return render_template('index.html')
 
 @app.route('/news')
 def news_page():
     api_key = get_api_key()
     macro_news = get_macro_news(api_key)
-    print("API Key:", api_key)  # Be careful not to log this in production
-    print("Macro News:", macro_news)
-    return render_template('news.html', macro_news=macro_news)
+    newsapi_articles = get_newsapi_articles()
+    return render_template('news.html', macro_news=macro_news, newsapi_articles=newsapi_articles)
 
 def get_macro_news(api_key):
     base_url = "https://www.alphavantage.co/query"
@@ -243,13 +281,77 @@ def get_macro_news(api_key):
         "limit": 10
     }
     response = requests.get(base_url, params=params)
-    print("API Response Status:", response.status_code)
-    print("API Response Content:", response.text[:500])  # Print first 500 characters
+    logger.debug("API Response Status: %s", response.status_code)
+    logger.debug("API Response Content: %s", response.text[:500])  # Print first 500 characters
     
     if response.status_code == 200:
         data = response.json()
         if "feed" in data:
             return data["feed"]
+    return None
+
+# Add this new function to get news based on selected categories
+def get_custom_news(api_key, categories):
+    base_url = "https://www.alphavantage.co/query"
+    params = {
+        "function": "NEWS_SENTIMENT",
+        "topics": ",".join(categories),
+        "apikey": api_key,
+        "limit": 50  # Increased limit to get more news items
+    }
+    response = requests.get(base_url, params=params)
+    
+    if response.status_code == 200:
+        data = response.json()
+        if "feed" in data:
+            return data["feed"]
+    return None
+
+@app.route('/customize', methods=['GET', 'POST'])
+def customize_news():
+    categories = [
+        'economy_macro', 'economy_monetary', 'economy_fiscal', 'economy_forex',
+        'finance', 'life_sciences', 'manufacturing', 'real_estate',
+        'retail_wholesale', 'technology'
+    ]
+    
+    if request.method == 'POST':
+        selected_categories = request.form.getlist('categories')
+        print(f"Selected categories: {selected_categories}")  # Debug print
+        session['selected_categories'] = selected_categories
+        return redirect(url_for('custom_news_feed'))
+    
+    return render_template('customize_news.html', categories=categories)
+
+@app.route('/custom_news_feed')
+def custom_news_feed():
+    selected_categories = session.get('selected_categories', [])
+    print(f"Retrieved categories from session: {selected_categories}")  # Debug print
+    api_key = get_api_key()
+    custom_news = get_custom_news(api_key, selected_categories)
+    print(f"Custom news retrieved: {'Yes' if custom_news else 'No'}")  # Debug print
+    return render_template('custom_news_feed.html', custom_news=custom_news, selected_categories=selected_categories)
+
+def get_custom_news(api_key, categories):
+    base_url = "https://www.alphavantage.co/query"
+    params = {
+        "function": "NEWS_SENTIMENT",
+        "topics": ",".join(categories),
+        "apikey": api_key,
+        "limit": 50
+    }
+    print(f"API request parameters: {params}")  # Debug print
+    response = requests.get(base_url, params=params)
+    print(f"API response status code: {response.status_code}")  # Debug print
+    
+    if response.status_code == 200:
+        data = response.json()
+        if "feed" in data:
+            return data["feed"]
+        else:
+            print(f"No 'feed' in API response. Response content: {data}")  # Debug print
+    else:
+        print(f"API request failed. Response content: {response.text}")  # Debug print
     return None
 
 if __name__ == '__main__':
