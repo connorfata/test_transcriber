@@ -31,7 +31,7 @@
 
     <div class="container mt-4">
         <h1>Customize Your News Feed</h1>
-        <form method="POST">
+        <form method="POST" action="{{ url_for('customize_news') }}">
             <div class="row">
                 {% for category in categories %}
                 <div class="col-md-4 mb-3">

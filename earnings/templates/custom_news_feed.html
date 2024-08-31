@@ -77,6 +77,71 @@
             color: #fff;
         }
     </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">Financial Analysis Tool</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/news">News</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="/customize">Customize News</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="main-headline mb-0">Your Custom News Feed</h1>
+            <a href="/customize" class="btn btn-customize">Customize Feed</a>
+        </div>
+
+        <p>Categories: {{ ", ".join(selected_categories) | replace('_', ' ') | title }}</p>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-info">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        {% if custom_news %}
+            {% for news in custom_news %}
+                <div class="news-item">
+                    <h3><a href="{{ news.url }}" class="text-dark text-decoration-none" target="_blank">{{ news.title }}</a></h3>
+                    <p>{{ news.summary[:300] }}{% if news.summary|length > 300 %}...{% endif %}</p>
+                    <small>{{ news.source }} | {{ news.time_published }}</small>
+                    <p>Topics: {{ ", ".join(news.topics | map(attribute='topic')) }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No news available for the selected categories.</p>
+        {% endif %}
+
+        <div class="mt-5">
+            <h2 class="section-title">API Requests Information</h2>
+            {% if api_requests %}
+                {% for request in api_requests %}
+                    <ul>
+                        <li><strong>Endpoint:</strong> {{ request.endpoint }}</li>
+                        <li><strong>Parameters:</strong> {{ request.params }}</li>
+                        <li><strong>Status Code:</strong> {{ request.status_code }}</li>
+                        <li><strong>Response Time:</strong> {{ request.response_time }} seconds</li>
+                    </ul>
+                {% endfor %}
+            {% else %}
+                <p>No API request information available.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const newsItems = document.querySelectorAll('.news-item');
@@ -90,57 +155,5 @@
             });
         });
     </script>
-</head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/">Financial Analysis Tool</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/news">News</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="/customize">Customize News</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <div class="container mt-4">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h1 class="main-headline mb-0">Your Custom News Feed</h1>
-            <a href="/customize" class="btn btn-customize">Customize Feed</a>
-        </div>
-        <p>Categories: {{ ", ".join(selected_categories) | replace('_', ' ') | title }}</p>
-
-        {% if custom_news %}
-            {% for category in selected_categories %}
-                <div class="category-section">
-                    <h2 class="section-title">{{ category | replace('_', ' ') | title }}</h2>
-                    {% for news in custom_news if news.topics and category in news.topics %}
-                        <div class="news-item">
-                            <h3><a href="{{ news.url }}" target="_blank" class="text-dark text-decoration-none">{{ news.title }}</a></h3>
-                            <p>{{ news.summary[:300] }}{% if news.summary|length > 300 %}...{% endif %}</p>
-                            <small>{{ news.source }} | {{ news.time_published }}</small>
-                        </div>
-                    {% else %}
-                        <p>No news available for this category.</p>
-                    {% endfor %}
-                </div>
-            {% endfor %}
-        {% else %}
-            <p>No news available for the selected categories.</p>
-        {% endif %}
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

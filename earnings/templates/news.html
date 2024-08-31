@@ -168,7 +168,7 @@
                                     <h3><a href="{{ article.url }}" target="_blank" class="text-dark text-decoration-none">{{ article.title }}</a></h3>
                                     <p>
                                         {% if article.description %}
-                                            {{ article.description[:400] }}{% if article.description|length > 400 %}...{% endif %}
+                                            {{ article.description[:250] }}{% if article.description|length > 250 %}...{% endif %}
                                         {% else %}
                                             No description available.
                                         {% endif %}
